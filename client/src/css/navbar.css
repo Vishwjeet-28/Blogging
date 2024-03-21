@@ -1,0 +1,61 @@
+.navbar {
+    background-color: #000;
+    padding: 10px 0;
+  }
+  
+  .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #e50914; /* Netflix red color */
+  }
+  
+  .navbar-toggler {
+    border: none;
+  }
+  
+  .nav-link {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-right: 15px;
+  }
+  
+  .nav-link:hover {
+    color: #e50914; /* Netflix red color */
+  }
+  
+  .dropdown-menu {
+    background-color: #000;
+  }
+  
+  .dropdown-item {
+    color: #fff;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #e50914; /* Netflix red color */
+  }
+  
+  .form-control {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #e50914; /* Netflix red color */
+  }
+  
+  .form-control:focus {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #e50914; /* Netflix red color */
+    box-shadow: none;
+  }
+  
+  .btn-outline-success {
+    color: #fff;
+    border-color: #e50914; /* Netflix red color */
+  }
+  
+  .btn-outline-success:hover {
+    color: #fff;
+    background-color: #e50914; /* Netflix red color */
+    border-color: #e50914; /* Netflix red color */
+  }
+  

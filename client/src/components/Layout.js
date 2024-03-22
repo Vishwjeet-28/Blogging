@@ -4,16 +4,16 @@ import Footer from './Footer'
 function Layout({ children }) {
     return (
         <div>
-            {/* Navbar  */}
             <Navbar />
+            
             {/* main Content  */}
-            <div className="content min-h-screen">
+            <div style={{minHeight: "100vh"}}>
                 {children}
             </div>
-            {/* Footer  */}
+
             <Footer />
         </div>
     )
 }
 
-export default Layout
+export default Layout;

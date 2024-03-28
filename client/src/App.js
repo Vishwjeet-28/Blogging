@@ -3,6 +3,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
+import CreateBlog from './components/CreateBLog'
 import { Toaster } from "react-hot-toast";
 
 
@@ -18,6 +19,7 @@ function App() {
             <Route exact path = "/login" element={<Login/>}/>
             <Route exact path = "/register" element={<Register/>}/>
             <Route exact path = "/profile" element={<Profile/>}/>
+            <Route exact path = "/create" element={<CreateBlog/>}/>
         </Routes>
       </Router>
     </div>

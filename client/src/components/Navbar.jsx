@@ -1,13 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [isProfilePage, setIsProfilePage] = useState(location.pathname === '/profile');
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") !== null);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const decodedToken = decodeToken(token);
+            if (decodedToken.exp < Date.now() / 1000) {
+                // Token expired, clear localStorage and set logged out
+                localStorage.removeItem("token");
+                setIsLoggedIn(false);
+                navigate("/login");
+                toast.error("Session expired. Please log in again.");
+            }
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, [navigate]);
+
+    const decodeToken = (token) => {
+        try {
+            return JSON.parse(atob(token.split('.')[1]));
+        } catch (error) {
+            return {};
+        }
+    };
 
     const handleProfile = () => {
         navigate("/profile");
@@ -20,6 +44,7 @@ const NavBar = () => {
         navigate("/login");
         toast.success("Logged out successfully");
     }
+
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -38,19 +63,26 @@ const NavBar = () => {
                         </li>
                     </ul>
                     {isLoggedIn ? (
+                        <>
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                        <button class="btn btn-outline-danger" type="submit" onClick={()=>{navigate("/create")}}>Create Blog</button>
+                        </li>
+                        </ul>
                         <form className="d-flex">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success me-2" type="submit">Search</button>
+                            <button className="btn btn-outline-danger me-2" type="submit">Search</button>
                             {isProfilePage ? (
-                                <button className="btn btn-outline-success" onClick={handleLogout}>Logout</button>
+                                <button class="btn btn-outline-danger" onClick={handleLogout}>Logout</button>
                             ) : (
-                                <button className="btn btn-outline-success" onClick={handleProfile}>Profile</button>
+                                <button class="btn btn-outline-danger" onClick={handleProfile}>Profile</button>
                             )}
                         </form>
+                        </>
                     ) : (
                         <form className="d-flex">
-                            <Link className="btn btn-outline-success me-2" to = "/login">Login</Link>
-                            <Link className="btn btn-outline-success" to = "/register">Register</Link>
+                            <Link class="btn btn-outline-danger" to = "/login">Login</Link>
+                            <Link class="btn btn-outline-danger" to = "/register">Register</Link>
                         </form>
                     )}
                 </div>

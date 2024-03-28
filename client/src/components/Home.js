@@ -3,7 +3,7 @@ import "../css/home.css";
 import Layout from "./Layout";
 const Home = ({children}) => {
   return (
-    <div>
+    <div class = "home-body">
       <Layout>
 
       </Layout>

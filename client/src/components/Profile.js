@@ -1,12 +1,14 @@
 import {React, useEffect, useState} from 'react'
 import { toast } from "react-hot-toast";
+import ModalUpdate from './ModalUpdate';
+import Navbar from './Navbar';
 import "../css/profile.css"
-import NavBar from './Navbar';
-import Footer from './Footer';
+
+
 const Profile = () => {
     const [userData, setUserData] = useState({});
     const [blogs, setBlogs] = useState([]);
-    
+  
 
     useEffect(()=>{
         const getProfile = async ()=>{
@@ -28,19 +30,32 @@ const Profile = () => {
         }
         getProfile();
     }, []);
-
-    const handleUpdateBlog = (title, description, id)=>{
-        
-    }
     const handleDelete = async (id)=>{
-        
+        const response = await fetch(`http://localhost:4000/api/blog/delete/${id}`, {
+            method: "DELETE",
+            headers:{
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem("token")
+            },
+        })
+        const data = await response.json();
+        if(data.success){
+            toast.success("Blog is deleted successfully");
+            window.location.reload();
+        }
+        else{
+            toast.error("Something went wrong. Please login again");
+        }
     }
 
   return (
 
     <div>
-        <NavBar></NavBar>
-        <div className="profile-container"style={{minHeight: "100vh"}} >
+    <Navbar/>
+    
+
+      <div className="profile-container">
+        <ModalUpdate></ModalUpdate>
       <div className="profile-details">
         <h1>{userData.name}'s Profile</h1>
         <p>Email: {userData.email}</p>
@@ -53,15 +68,15 @@ const Profile = () => {
             <div className="blog-options">
               <button onClick={()=>{handleDelete(blog._id)}}>Delete</button>
               {/* Add update functionality here */}
-              <button style={{backgroundColor: "green"}} onClick={()=> handleUpdateBlog(blog.title, blog.description, blog._id)} >Update</button>
+              <button style={{backgroundColor: "green"}} >Update</button>
             </div>
           </div>
         ))}
       </div>
     </div>
-    <Footer></Footer>
+    
     </div>
   )
 }
 
-export default Profile;
+export default Profile

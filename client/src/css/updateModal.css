@@ -1,0 +1,81 @@
+/* Modal Background Overlay */
+.modal-backdrop {
+  opacity: 0.5; /* Adjust the opacity as needed */
+  background-color: #000; /* Background color of the overlay */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff; /* Background color of the modal */
+  border-radius: 10px; /* Border radius */
+}
+
+/* Modal Header */
+.modal-header {
+  border-bottom: 1px solid #ccc; /* Bottom border */
+  padding: 1rem; /* Padding */
+}
+
+/* Modal Title */
+.modal-title {
+  font-weight: bold; /* Font weight */
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 1rem; /* Padding */
+}
+
+/* Modal Footer */
+.modal-footer {
+  border-top: 1px solid #ccc; /* Top border */
+  padding: 1rem; /* Padding */
+}
+
+/* Close Button */
+.btn-close {
+  color: #000; /* Close button color */
+}
+
+/* Modal Input */
+.modalInput {
+  width: 100%; /* Set input width */
+  padding: 0.5rem; /* Input padding */
+  border: 1px solid #ccc; /* Input border */
+  border-radius: 5px; /* Input border radius */
+  margin-bottom: 0.5rem; /* Bottom margin */
+}
+
+.modalTextarea{
+  width: 100%; /* Set input width */
+  height: 200px;
+  padding: 0.5rem; /* Input padding */
+  border: 1px solid #ccc; /* Input border */
+  border-radius: 5px; /* Input border radius */
+  margin-bottom: 0.5rem; /* Bottom margin */
+}
+
+/* Modal Add Button */
+.modalAddBtn {
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Button border radius */
+  padding: 0.5rem 1rem; /* Button padding */
+  cursor: pointer; /* Cursor style */
+}
+
+/* Modal Close Button */
+.modalCloseBtn {
+  background-color: #ccc; /* Button background color */
+  color: #000; /* Button text color */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Button border radius */
+  padding: 0.5rem 1rem; /* Button padding */
+  cursor: pointer; /* Cursor style */
+}
+
+/* Modal Label */
+.modalLabel {
+  font-weight: bold; /* Font weight */
+}

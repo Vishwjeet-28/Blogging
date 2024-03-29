@@ -5,10 +5,12 @@ body {
 }
 
 .home-container {
+    min-height: 100vh;
     text-align: center;
     background-color: #111;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     width: 100%;
+    
 }
 .login{
     text-align: center;

@@ -1,14 +1,17 @@
-import {React, useEffect, useState} from 'react'
+import {React, useEffect, useState, useRef} from 'react'
 import { toast } from "react-hot-toast";
 import ModalUpdate from './ModalUpdate';
-import Navbar from './Navbar';
+import NavBar from './Navbar';
+import Footer from './Footer';
 import "../css/profile.css"
 
 
 const Profile = () => {
+    const [currentBlog, setCurrentBlog] = useState({title: "", description: "", id: ""})
     const [userData, setUserData] = useState({});
     const [blogs, setBlogs] = useState([]);
-  
+    const ref = useRef(null);
+    const refClose = useRef(null);
 
     useEffect(()=>{
         const getProfile = async ()=>{
@@ -30,6 +33,11 @@ const Profile = () => {
         }
         getProfile();
     }, []);
+
+    const handleUpdateBlog = (title, description, id)=>{
+        setCurrentBlog({title, description, id});
+          ref.current.click();
+    }
     const handleDelete = async (id)=>{
         const response = await fetch(`http://localhost:4000/api/blog/delete/${id}`, {
             method: "DELETE",
@@ -51,11 +59,12 @@ const Profile = () => {
   return (
 
     <div>
-    <Navbar/>
-    
+    <ModalUpdate ref1 = {ref} refClose1= {refClose} 
+      title = {currentBlog.title} description={currentBlog.description} id={currentBlog.id}>
+    </ModalUpdate>
+    <NavBar></NavBar>
 
       <div className="profile-container">
-        <ModalUpdate></ModalUpdate>
       <div className="profile-details">
         <h1>{userData.name}'s Profile</h1>
         <p>Email: {userData.email}</p>
@@ -68,15 +77,16 @@ const Profile = () => {
             <div className="blog-options">
               <button onClick={()=>{handleDelete(blog._id)}}>Delete</button>
               {/* Add update functionality here */}
-              <button style={{backgroundColor: "green"}} >Update</button>
+              <button style={{backgroundColor: "green"}} onClick={()=> handleUpdateBlog(blog.title, blog.description, blog._id)} >Update</button>
             </div>
           </div>
         ))}
       </div>
     </div>
-    
+    <br />
+    <Footer></Footer>
     </div>
   )
 }
 
-export default Profile
+export default Profile;

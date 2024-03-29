@@ -1,12 +1,16 @@
 import React from "react";
 import "../css/home.css";
-import Layout from "./Layout";
+import Navbar from './Navbar'
+import Footer from './Footer'
+
 const Home = ({children}) => {
   return (
     <div class = "home-body">
-      <Layout>
+    <Navbar></Navbar>
+    <div class="home-container">
 
-      </Layout>
+    </div>
+    <Footer></Footer>
     </div>
   );
 };

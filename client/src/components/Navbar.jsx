@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { Link } from "react-router-dom";
+import ModalCreate from './ModalCreate';
 
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [isProfilePage, setIsProfilePage] = useState(location.pathname === '/profile');
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") !== null);
+
+    const ref = useRef(null);
+    const refClose = useRef(null);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -47,6 +51,8 @@ const NavBar = () => {
 
 
     return (
+        <>
+        <ModalCreate ref1 = {ref} refClose1 = {refClose}></ModalCreate>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <p className="navbar-brand" style={{ fontWeight: "bold", color: "#e50914", paddingTop: "20px" }}>Blogging</p>
@@ -62,13 +68,15 @@ const NavBar = () => {
                             <button className="nav-link active">About</button>
                         </li>
                     </ul>
-                    {isLoggedIn ? (
-                        <>
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                        <button class="btn btn-outline-danger" type="submit" onClick={()=>{navigate("/create")}}>Create Blog</button>
-                        </li>
-                        </ul>
+                    {isLoggedIn && !isProfilePage ? (
+                            <>
+                                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li className="nav-item">
+                                        <button class="btn btn-outline-danger" type="submit" onClick={() => ref.current.click()}>Create Blog</button>
+                                    </li>
+                                </ul>
+                            </>
+                        ) : null}
                         <form className="d-flex">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn btn-outline-danger me-2" type="submit">Search</button>
@@ -78,16 +86,10 @@ const NavBar = () => {
                                 <button class="btn btn-outline-danger" onClick={handleProfile}>Profile</button>
                             )}
                         </form>
-                        </>
-                    ) : (
-                        <form className="d-flex">
-                            <Link class="btn btn-outline-danger" to = "/login">Login</Link>
-                            <Link class="btn btn-outline-danger" to = "/register">Register</Link>
-                        </form>
-                    )}
                 </div>
             </div>
         </nav>
+        </>
     );
 }
 

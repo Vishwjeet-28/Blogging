@@ -6,7 +6,7 @@ const User = require("../../database/Model/User");
 router.get("/all", authenticate, async (req,res)=>{
     try {
         const blogs = await Blog.find();
-        res.status(200).json({blogs, message: "Blogs retrieved successfully"});
+        res.status(200).json({blogs, message: "Blogs retrieved successfully", success:  false});
     } catch (error) {
         res.status(501).json({message: "Internal server error", success:  false, errors: error});
     }
@@ -25,7 +25,7 @@ router.post("/create", authenticate, async (req, res)=>{
     try {
         // Step 1: Create Blog and take blog ID
         const newBlog = await Blog.create(blog);
-        console.log(newBlog);
+        //console.log(newBlog);
         const blogId = newBlog._id;
 
         //step2: Update the user, append blogId in user.blog_ids
